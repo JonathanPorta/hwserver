@@ -28,10 +28,8 @@ RUN mkdir $STEAMEXE && \
 ENV INSTALL_DIR $HW_HOME/serverfiles
 RUN /usr/local/steamcmd/steamcmd.sh +force_install_dir $INSTALL_DIR +login anonymous +app_update 405100 validate +quit
 
-# symlink steam client libs
+# symlink steamcmd deps
 RUN ln -s $INSTALL_DIR/steam_appid.txt $HW_HOME/steam_appid.txt
-RUN ln -s $STEAMEXE/linux32/steamclient.so $INSTALL_DIR/Hurtworld_Data/Plugins/x86/steamclient.so
-RUN ln -s $INSTALL_DIR/linux64/steamclient.so $INSTALL_DIR/Hurtworld_Data/Plugins/x86_64/steamclient.so
 
 # ensure $HW_HOME is owned by $HW_USER
 RUN chown -R $HW_USER:$HW_USER $HW_HOME
@@ -39,8 +37,8 @@ RUN chown -R $HW_USER:$HW_USER $HW_HOME
 # copy any custom stuff added to the server
 COPY rootfs /
 
-EXPOSE 12871
-EXPOSE 12881
+EXPOSE 12871/udp
+EXPOSE 12881/udp
 
 USER $HW_USER
 WORKDIR $HW_HOME

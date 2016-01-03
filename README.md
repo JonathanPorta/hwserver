@@ -6,7 +6,7 @@ This project contains a Dockerfile for getting [a Hurtworld server](http://hurtw
 
 First, install [docker](https://www.docker.com/).
 
-	$ make
+	$ make build
 	$ make runserver
 	docker run -dP fishworks/hwserver
 	b0d7d753caeac465acaf55f790f85e973a1fce17bc19518df6c2538464f96a45
